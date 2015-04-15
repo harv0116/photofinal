@@ -1,6 +1,6 @@
 /*  LIST VIEW WITH NOTCHES */
 
-
+/*
 [data-role=listview]{
   list-style:none;
 }
@@ -46,9 +46,11 @@
 	width: 350px;
 	height: 500px;
 }
+*/
 /*************************************
         Forms
 *************************************/
+/*
 .formBox{
   width: 16rem;
   padding: .2rem 1rem;
@@ -136,15 +138,15 @@ p, ul.desc {
 	margin-left: 2rem;
 	margin-right: 2rem;
 }
-
+*/
 /********************************
         TABS
 ********************************/
-
+/*
 ul.tabs{
 	width:100%;
 	height:3rem;
-	/*margin-bottom:30px;*/
+
 }
 .tabs li.tab{
 	background:$darkgrey !important;
@@ -173,26 +175,22 @@ ul.tabs{
 	border-right:1px solid $darkgrey !important;
 	border-left:1px solid $darkgrey !important;
 }
-
+*/
 /********************************
         PAGES
 ********************************/
-
+/*
 [data-role="page"]{
-	/*display:none;*/
-	/*background-color:$black;*/
+
 	color: $black;	
-	/*width:100%;*/
+
 	padding-bottom: 60px;
 	position:absolute; 
 	top: 3.1rem; 	
 	margin-top: -1px;
-	/*left: 100%;*/
-	/*right: -10px;*/
-	/*transition: left 0.5s linear,
-			  right 0.5s linear; */
+
 	z-index: 10;
-	/*** Items to trigger hardware acceleration ***/
+
 	-webkit-backface-visibility: hidden;
 	-moz-backface-visibility: hidden;
 	-ms-backface-visibility: hidden;
@@ -211,8 +209,7 @@ ul.tabs{
   right: 0;
   z-index: 5;
   padding-bottom: 60px;
-  /*background-color:$white;*/
-  /*border-top:1px solid #lightgrey;*/
+
 }
 [data-role=page].show{
   display:block;
@@ -259,14 +256,14 @@ div#home{
 [data-role="content"]{
   margin-top: -1px;
 	border-top:1px solid #666;	
-  /* to match the top of the active tab */
+
 }
 [data-role="content"] p:last-child{
 	padding-bottom:0rem;
 }
-
+*/
 /*** ICONS  ****/
-
+/*
 #hometab {
 	background: url("../img/home.png") no-repeat 50% 50%;
 	background-size: 3rem 3rem;
@@ -283,4 +280,36 @@ div#home{
 	background: url("../img/contacts.png") no-repeat 50% 50%;
 	background-size: 3rem 3rem;
 	text-align: center;
+}
+*/
+* {
+	outline: solid red 1px;
+}
+
+#wrapper {
+	max-width: 100%;
+	height: 90%;
+}
+
+#leftside {
+	width: 50%;
+}
+
+#rightside {
+	width: 50%;
+	float: left;
+}
+
+#right1, #right2, #right3, #right4 {
+	display: block;
+}
+
+#navigation {
+	float: left;
+	max-width: 100%;
+	height: 10%;	
+}
+
+#lefttab, #righttab {
+	width: 50%;	
 }

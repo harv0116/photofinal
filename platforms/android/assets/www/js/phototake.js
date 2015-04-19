@@ -16,7 +16,7 @@ var take = {
 		  //good idea to set the size of the canvas in Javascript in addition to CSS
 		  take.c.height = 600;
 		  take.c.width = 800;
-		  take.context = take.c.getContext('2d');
+		  context = take.c.getContext('2d');
 		  take.i.addEventListener("load", function(ev){
 			//load to canvas after the image is loaded
 			//in this sample the original is 300px x 430px
@@ -33,7 +33,7 @@ var take = {
 			console.log("width: ", w, " height: ", h, " aspect ratio: ", aspectRatio);
 			c.width = w;
 			c.style.width = w + "px";
-			take.context.drawImage(take.i, 0, 0, w, h);
+			context.drawImage(take.i, 0, 0, w, h);
 			//drawImage(image, x-position, y-position, width, height)
 		  });
 		  take.i.crossOrigin = "Anonymous";
@@ -50,20 +50,20 @@ var take = {
 			  //https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Drawing_text
 			  if(txt != ""){
 				//clear the canvas
-				take.context.clearRect(0, 0, take.c.w, take.c.h);
+				context.clearRect(0, 0, take.c.w, take.c.h);
 				//reload the image
 				var w = take.i.width;
 				var h = take.i.height;
-				take.context.drawImage(take.i, 0, 0, w, h);
+				context.drawImage(take.i, 0, 0, w, h);
 				//THEN add the new text to the image
 				var middle = take.c.width / 2;
 				var bottom = take.c.height - 50;
-				take.context.font = "30px sans-serif";
-				take.context.fillStyle = "red";
-				take.context.strokeStyle = "gold";
-				take.context.textAlign = "center";
-				take.context.fillText(txt, middle, bottom);
-				take.context.strokeText(txt, middle, bottom);
+				context.font = "30px sans-serif";
+				context.fillStyle = "red";
+				context.strokeStyle = "gold";
+				context.textAlign = "center";
+				context.fillText(txt, middle, bottom);
+				context.strokeText(txt, middle, bottom);
 			  }
 		}
 };

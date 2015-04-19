@@ -13,10 +13,6 @@ Mixins & Extensions
 	}
 }
 
-@mixin verticalSpaced($screen_size,$percentage) {
-	height: ($screen_size * $percentage) + px;
-}
-
 // ----------------- //
 //  clearfix
 //  @extend .clearfix;

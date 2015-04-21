@@ -40,6 +40,8 @@ var app = {
 				ev.preventDefault();
 				console.log(ev);				
 				// ANNA's stuff
+				document.querySelector("#listphoto").style.display="block";
+				document.querySelector("#takephoto").style.display="none";
 				downloadGrid();
 			});
 			
@@ -51,7 +53,9 @@ var app = {
 
 			mchammertime.on('tap', function(ev) {
 				ev.preventDefault();
-				console.log(ev);				
+				console.log(ev);
+				document.querySelector("#takephoto").style.display="block";
+				document.querySelector("#listphoto").style.display="none";				
 				take.useCamera();
 			});
 	}

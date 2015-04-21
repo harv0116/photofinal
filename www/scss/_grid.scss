@@ -1,27 +1,53 @@
-.tabbar {
-	max-width: ( $breakpoint-small );
-	margin: 0 auto;
-}
-.row {	
-	@extend .clearfix;
-}
-.col-3 {
-	text-align: center;
-	height: $col3-height;
-	@include equalSpaced(3, $col3-margin-sm, $breakpoint-small );
-	float: left;
+.container{
+  max-width: 600px;
+  background-color: #abc;
+  margin: 5% auto;
+  
 }
 
-@media only screen and (min-width: $breakpoint-small) {
-/* no change */
+.col-container{
+  @extend .clearfix;
+  padding-bottom: 5px;
 }
 
-@media only screen and (min-width: $breakpoint-medium) {
-	.tabbar { max-width: $breakpoint-medium; }	
-	.col-3 { @include equalSpaced(3, $col3-margin-md, $breakpoint-medium); }
+// Col 2 Usage
+.col-2{
+  background: #333;
+  min-height: 100px;
+  float: left;
+  // equalSpaced( $num_of_cols, $spacing, $width  )
+  @include equalSpaced(2, 5%, 100%);
 }
 
-@media only screen and (min-width: $breakpoint-large) {
-	.tabbar { max-width: $breakpoint-large; }
-	.col-3 { @include equalSpaced(3, $col3-margin-lg, $breakpoint-large); }
+
+// Col 2 Usage
+.col-3{
+  background: #333;
+  min-height: 100px;
+  float: left;
+  // equalSpaced( $num_of_cols, $spacing, $width  )
+  @include equalSpaced(3, 2%, 100%);
+}
+
+// Col 2 Usage
+.col-4{
+  //background: #333;
+  min-height: 100px;
+  float: left;
+  border: 1px solid #333;
+  margin-bottom: 0.5rem;
+  margin-right: 0.2rem;
+  background-color: #D5DBEF;
+  // equalSpaced( $num_of_cols, $spacing, $width  )
+  @include equalSpaced(4, 0%, 100%);
+  
+}
+
+.col-4 > img{
+	border-radius: 2px;
+
+}
+.col-4 > img, .col-4 > input[type="button"]{
+		margin: auto;
+	display: block;
 }

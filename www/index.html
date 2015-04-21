@@ -11,7 +11,7 @@
     </head>
     <body>     
              <div data-role="header">
-    			<h1>Take Photos</h1>
+    			<h1>Image Capture &amp; Gallery</h1>
   			</div>
             
             <div id="wrapper">
@@ -35,10 +35,7 @@
 							<p><button id="s">Save</button></p>
                         </div>
                     </div>
-            <div id="navigation">
-                <div id="lefttab"><h3 id="list">List Photos</h3></div>
-                <div id="righttab"><h3 id="camera">Take Photo</h3></div>
-            </div>
+
         
             	</section>
             
@@ -48,6 +45,8 @@
             <section data-role="page" id="listphoto" style="display:none">
                 <!-- Show the grid -->
                 <!-- Anna's piece -->
+                
+                
                 <div data-role="content">
                     <div id="grid"></div>
                 </div>
@@ -55,7 +54,7 @@
             
             <div data-role="overlay" style="display:none">&nbsp;</div>
       
-            <div data-role="modal" style="display:none">
+            <div data-role="modal" style="display:none" id="fullImage">
             <!-- Show full image -->
             <!-- Anna's piece -->
             
@@ -63,6 +62,10 @@
 		</div>
         
         <div data-role="footer" id="sticky">
+            <div id="navigation">
+                <div id="lefttab"><h3 id="list">List Photos</h3></div>
+                <div id="righttab"><h3 id="camera">Take Photo</h3></div>
+            </div>
             <h3>Paul Harvey and Anna Ioudovskaya &copy;2015</h3>
         </div>
     	<script type="text/javascript" src="cordova.js"></script>
@@ -70,6 +73,7 @@
     	<script type="text/javascript" src="js/ajax.js"></script>
 		<script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript" src="js/phototake.js"></script>
+        <script type="text/javascript" src="js/images.js"></script>
         
 
         

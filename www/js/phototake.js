@@ -123,14 +123,19 @@ var take = {
 			
 			var url = "http://m.edumedia.ca/ioud0001/mad9022/final/save.php";
 			//alert("app.deviceID=" + app.deviceID)
-			var postData = "dev=" + app.deviceID; + "&thumb=" + thumbpng + "&img=" + fullpng;
+			var postData = "dev=" + device.uuid + "&thumb=" + thumbpng + "&img=" + fullpng;
+			//var postData = "dev=" + "abbbbbb" + "&thumb=" + thumbpng + "&img=" + fullpng;
+			alert(postData);
 			sendRequest(url, take.imgSaved, postData);
 		
 		},
 		imgSaved: function(xhr)
 		{
-			//alert(xhr.responseText);
-			alert("Image Saved");
+			alert(xhr.responseText);
+			//var msg = JSON.parse(xhr.responseText); 
+			
+			//alert(msg.message);
+			//alert("Image Saved");
 		},
 		useCamera: function()
 		{

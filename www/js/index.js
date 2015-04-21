@@ -40,7 +40,7 @@ var app = {
 				ev.preventDefault();
 				console.log(ev);				
 				// ANNA's stuff
-				//app.listphotos();
+				downloadGrid();
 			});
 			
 		takePhoto = document.getElementById("righttab");

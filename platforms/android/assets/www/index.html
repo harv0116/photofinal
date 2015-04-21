@@ -10,48 +10,48 @@
         <title>Phone Final Project</title>        
     </head>
     <body>     
-            <section data-role="page" id="takephoto" style="display:block">
+             <div data-role="header">
+    			<h1>Take Photos</h1>
+  			</div>
+            
+            <div id="wrapper">
+           		 <section data-role="page" id="takephoto" style="display:block">
                 <!-- Show the photobox -->
                 <!-- Paul's piece -->
-                <div id="wrapper">
+                
                 	<div id="leftside">
-                     	<canvas id="c"></canvas>
+                     	<canvas id="full"></canvas>
+                        <canvas id="thumb"></canvas>
                     </div>
                     <div id="rightside">
                     	<div id="right1">
                          	<input type="text" id="t" value="No more than 30 characters" maxlength="30"/><br/>
-    						
+                        	<input type="radio" id="r1" name="placement" value="top" checked />top
+							<input type="radio" id="r2" name="placement" value="bottom" />bottom    						
+                        	<p><button id="b">Set Text</button></p>
+                        	                            
                         </div>
                         <div id="right2">
-                        	<input type="radio" id="r1" name="textPlace" value="top"/>top
-							<input type="radio" id="r2" name="textplace" value="bottom"/>bottom
-                        </div>
-                        <div id="right3">
-                        	<p>&nbsp;</p>
-                        </div>
-                        <div id="right4">
-                        	<button id="b">Set Text</button>
+							<p><button id="s">Save</button></p>
                         </div>
                     </div>
-                    <div id="navigation">
-                    	<div id="lefttab"></div>
-                        <div id="righttab"></div>
-                    </div>
-                </div>
-                
-                <div data-role="content">
-                    <div id="photobox"></div>
-                      
-                </div>
-            </section>
+            <div id="navigation">
+                <div id="lefttab"><h3 id="list">List Photos</h3></div>
+                <div id="righttab"><h3 id="camera">Take Photo</h3></div>
+            </div>
         
-            <div data-role="page" id="listphoto" style="display:none">
+            	</section>
+            
+
+        	
+            
+            <section data-role="page" id="listphoto" style="display:none">
                 <!-- Show the grid -->
                 <!-- Anna's piece -->
                 <div data-role="content">
                     <div id="grid"></div>
                 </div>
-            </div>
+            </section>
             
             <div data-role="overlay" style="display:none">&nbsp;</div>
       
@@ -60,12 +60,20 @@
             <!-- Anna's piece -->
             
             </div>
-
+		</div>
+        
+        <div data-role="footer" id="sticky">
+            <h3>Paul Harvey and Anna Ioudovskaya &copy;2015</h3>
+        </div>
     	<script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/hammer.js"></script>
-    	<script type="text/javascript" src="js/index.js"></script>
+    	<script type="text/javascript" src="js/ajax.js"></script>
+		<script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript" src="js/phototake.js"></script>
-        <script type="text/javascript" src="js/photolist.js"></script>
+        
+
+        
+       
 	</body>
 
 </html>

@@ -7,6 +7,7 @@ var take = {
 	w: 0,
 	h: 0,
 	aspectratio: 0,
+	img: "",
 
 	
 	phototake: function() {
@@ -47,22 +48,24 @@ var take = {
 		addText: function(ev){
 			var txt = document.getElementById("t").value;
 			  //https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Drawing_text
-			  
+			  alert("HELLO");
 			  if(txt != "" && txt.length <= 30){
+				  alert(txt);
 					//clear the canvas
-					take.context.clearRect(0, 0, take.full.w, take.full.h);
-					take.tcontext.clearRect(0,0, take.thumb.width, take.thumb.height);
+					take.context.clearRect(0, 0, take.full.width, take.full.height);
+					take.tcontext.clearRect(0, 0, take.thumb.width, take.thumb.height);
 					//take.context.clearRect(0, 0, take.c.w, take.c.h);
+					alert("made it here 1");
 					//reload the big image
 					var wid = take.full.width;
 					var hei = take.full.height;
-					take.context.drawImage(take.i, 0, 0, wid, hei);
-					
+					take.context.drawImage(take.img, 0, 0, wid, hei);
+					alert("made it here 2");
 					//reload the thumbnail
 					var widt = take.thumb.width;
 					var heig = take.thumb.height;
-					take.tcontext.drawImage(take.i, 0, 0, widt, heig);
-					
+					take.tcontext.drawImage(take.img, 0, 0, widt, heig);
+					alert("made it here 3");
 					//THEN add the new text to the big image
 					var middle = take.full.width / 2;
 					var top = take.full.height - take.full.height + 50;
@@ -106,6 +109,7 @@ var take = {
 						take.tcontext.fillText(txt, tmiddle, tbottom);
 						take.tcontext.strokeText(txt, tmiddle, tbottom);
 					}
+
 			  }
 		},
 		
@@ -139,26 +143,26 @@ var take = {
 			
 			
 						
-			var img = new Image();
-			alert(cameraCapture);
-			img.src = cameraCapture;
-			img.onload = function(){ 
-				var imgWidth = img.width;
-				var imgHeight = img.height;
+			take.img = new Image();
+			
+			take.img.src = cameraCapture;
+			take.img.onload = function(){ 
+				var imgWidth = take.img.width;
+				var imgHeight = take.img.height;
 				take.aspectRatio = imgHeight / imgWidth ;
-				alert(take.aspectRatio);
+				
 				take.full.width = 600;
 				full.style.width = "600px";
 			 	var fh = 600 * take.aspectRatio;
 				take.full.height = fh;
 				full.style.height = fh + "px";
-				img.height = fh;
-				img.width = 600;
-				take.full.width = img.width;
-				take.full.style.width = img.width + "px";
-				take.full.height = img.height;
-				take.full.style.height = img.height + "px";
-				take.context.drawImage(img, 0, 0, 600, fh);
+				take.img.height = fh;
+				take.img.width = 600;
+				take.full.width = take.img.width;
+				take.full.style.width = take.img.width + "px";
+				take.full.height = take.img.height;
+				take.full.style.height = take.img.height + "px";
+				take.context.drawImage(take.img, 0, 0, 600, fh);
 				//drawImage(image, x-position, y-position, width, height)
 				
 					//thumbnail
@@ -167,9 +171,9 @@ var take = {
 				var th = 180 * take.aspectRatio;
 				take.thumb.height = th;
 				take.thumb.style.height = th + "px";
-				img.width = 180;
-				img.height = th;
-				take.tcontext.drawImage(img, 0, 0, 180, th);
+				take.img.width = 180;
+				take.img.height = th;
+				take.tcontext.drawImage(take.img, 0, 0, 180, th);
 			}
 				img.crossOrigin = "Anonymous";
 				

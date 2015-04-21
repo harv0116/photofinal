@@ -48,24 +48,24 @@ var take = {
 		addText: function(ev){
 			var txt = document.getElementById("t").value;
 			  //https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Drawing_text
-			  alert("HELLO");
+			  
 			  if(txt != "" && txt.length <= 30){
-				  alert(txt);
+				  
 					//clear the canvas
 					take.context.clearRect(0, 0, take.full.width, take.full.height);
 					take.tcontext.clearRect(0, 0, take.thumb.width, take.thumb.height);
 					//take.context.clearRect(0, 0, take.c.w, take.c.h);
-					alert("made it here 1");
+					
 					//reload the big image
 					var wid = take.full.width;
 					var hei = take.full.height;
 					take.context.drawImage(take.img, 0, 0, wid, hei);
-					alert("made it here 2");
+					
 					//reload the thumbnail
 					var widt = take.thumb.width;
 					var heig = take.thumb.height;
 					take.tcontext.drawImage(take.img, 0, 0, widt, heig);
-					alert("made it here 3");
+					
 					//THEN add the new text to the big image
 					var middle = take.full.width / 2;
 					var top = take.full.height - take.full.height + 50;
@@ -129,7 +129,8 @@ var take = {
 		},
 		imgSaved: function(xhr)
 		{
-			alert(xhr.responseText);
+			//alert(xhr.responseText);
+			alert("Image Saved");
 		},
 		useCamera: function()
 		{

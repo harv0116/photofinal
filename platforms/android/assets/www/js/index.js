@@ -40,6 +40,7 @@ var app = {
 				ev.preventDefault();
 				console.log(ev);				
 				// ANNA's stuff
+				document.querySelector("#lefttab").className = "focus";
 				document.querySelector("#listphoto").style.display="block";
 				document.querySelector("#takephoto").style.display="none";
 				downloadGrid();

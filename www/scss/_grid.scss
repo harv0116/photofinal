@@ -1,7 +1,7 @@
-.container{
-  max-width: 600px;
-  background-color: #abc;
-  margin: 5% auto;
+ 
+.grid .container{
+  max-width: 800px;
+  margin: $margin; 
   
 }
 
@@ -36,10 +36,9 @@
   float: left;
   border: 1px solid #333;
   margin-bottom: 0.5rem;
-  margin-right: 0.2rem;
   background-color: #D5DBEF;
   // equalSpaced( $num_of_cols, $spacing, $width  )
-  @include equalSpaced(4, 0%, 100%);
+  @include equalSpaced(4, 1%, 100%);
   
 }
 
@@ -47,7 +46,7 @@
 	border-radius: 2px;
 
 }
-.col-4 > img, .col-4 > input[type="button"]{
-		margin: auto;
+.col-4 > img, input[type="button"]{
+	margin: $margin-center;
 	display: block;
 }

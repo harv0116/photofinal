@@ -1,8 +1,6 @@
 //var url = "http://localhost/semester2/mad9022/photofinal/www/";
 var url = "http://m.edumedia.ca/ioud0001/mad9022/final/";
-//var app.deviceID = device.UUID;
-//var app.deviceID = device.uuid; // this device id 
-//var app.deviceID = "234234";
+
 var image_id; 
 // the image id is global so it can be re-used in the modals - to view an image and to remove an image from the list and database 
 // the image id is declared in the fetchImg function and changes each time an image is clicked
@@ -13,11 +11,14 @@ var timeout; // timeout variable - the message will disappear
 
 function downloadGrid(){
 	
-	var path = url + "list.php?dev=" + app.deviceID;  
-	sendRequest(path, imgReturned, "GET");
+	var path = url + "list.php?dev=" + app.deviceID; 
+	
+	document.querySelector("#grid").innerHTML = "";   
+	sendRequest(path, showGallery, "GET");
 }
 
 function fetchImg(ev){
+	
 	image_id  = ev.target.parentElement.firstElementChild.id;
 	var thisClick = ev.target.nodeName; 
 
@@ -35,15 +36,17 @@ function fetchImg(ev){
 }
 
 function modalImg(xhr){
-	var json = JSON.parse(xhr.responseText);
-	var overlay = document.querySelector("[data-role=overlay]"); 
-	overlay.style.display = "block"; 
-	var modal =  document.querySelector("[data-role=modal]"); 
-	modal.style.display = "block";   
+	json = JSON.parse(xhr.responseText);
+
+	document.querySelector("[data-role=overlay]").style.display = "block"; 
+	var modal = document.querySelector("[data-role=modal]");   
+	modal.style.display = "block";
 	
 	modal.innerHTML = ""; // clears the modal to prevent multiple images from showing up
-	var div = document.getElementById("fullImage"); 
+	
+	//var div = document.getElementById("fullImage"); 
 	var img = document.createElement("img");
+	console.log(json.data);
 	img.src = json.data;
 	image_id = img.id = json.id; 
 	img.width = take.full.width;
@@ -54,71 +57,79 @@ function modalImg(xhr){
 	backBtn.type = "button"; 
 	backBtn.className = "close";
 	backBtn.value = "Close Image"; 
+	p.appendChild(backBtn); 
 	
 	modal.appendChild(img);
 	modal.appendChild(p); 
-	modal.appendChild(backBtn);
-
-	grid.btnhide(); 
+ 
+	grid.btnhide();
+	ev.preventDefault(); 
 }
 
 
 
 // returns the images and initializes the tap event for each image
-function imgReturned(xhr){
-	 
+function showGallery(xhr){
+	
 	json = JSON.parse(xhr.responseText);
-	var img, button; 
-	var ul = document.createElement("ul"); 
-	ul.className ="container"; 
-	ul.setAttribute("data-role", "listview");
-	ul.innerHTML = ""; 
-	var br = document.createElement("br"); 
 	 
-	for(var i=0; i<json.thumbnails.length; i++)
+	if (json.code == 0)
 	{
+		var img, button; 
+		var ul = document.createElement("ul"); 
+		ul.className ="container"; 
+		ul.setAttribute("data-role", "listview");
+		ul.innerHTML = ""; 
+		
+		var status = document.createElement("p"); 
+		status.className = "status"; 
+		status.innerHTML = ""; 
+	 	if (json.thumbnails.length > 0)
+		{
+			for(var i=0; i<json.thumbnails.length; i++)
+			{
 								   
-								  img = document.createElement("img");
-								  button = document.createElement("input"); 
-								  var li = document.createElement("li"); 
-								  var id = json.thumbnails[i].id;
-								  li.setAttribute("data-ref", id);
+				img = document.createElement("img");
+				button = document.createElement("input"); 
+				var li = document.createElement("li"); 
+				var id = json.thumbnails[i].id;
+				li.setAttribute("data-ref", id);
 								  
-								  img.crossOrigin = "Anonymous";
-								  img.width = "180";
-								  //img.height = "";
-								  img.src = json.thumbnails[i].data;
-								  img.id = id;
+				img.crossOrigin = "Anonymous";
+				img.width = "180";
+				
+				img.src = json.thumbnails[i].data;
+				img.id = id;
 								  
-								  button.id = "btn" + id;
-								  button.type = "button"; 
-								  button.value = "Delete image!";
-								  button.className = "button"; 
-								  li.className = "col-4"; 
+				button.id = "btn" + id;
+				button.type = "button"; 
+				button.value = "Delete image";
+				button.className = "button"; 
+				li.className = "col-4"; 
 								  
-								  li.appendChild(img);
-								  li.appendChild(br);
-								  li.appendChild(button); 
-								  ul.appendChild(li); 
-								  
+				li.appendChild(img);
+				li.appendChild(button); 
+				ul.appendChild(li); 				  
+			}
+			
+			document.querySelector("#grid").appendChild(ul);
+			grid.init(); // initilizes the tap event listeners
+		}
+		else
+		{
+			status.innerHTML = "You have no images, please take some!"; 
+		}
+		document.querySelector("#grid").appendChild(status); // loads a status when images have been deleted 
+	} else
+	{
+		alert(json.message); 
 	}
 	
-	/*
-	var status = document.createElement("p"); 
-	status.className = "status"; 
-	status.innerHTML = ""; 
-	*/
-	//document.querySelector("#grid").appendChild(status); // loads a status when images have been deleted 
-	document.querySelector("#grid").appendChild(ul);
-	grid.init(); // initilizes the tap event listeners
 }
 
 var grid = {
 init: function(){
-	 alert("grid init"); 
-	 var modal = document.querySelector("[data-role=modal]").style.display = "none";
-	 var overlay = document.querySelector("[data-role=overlay]"); 
-	overlay.style.display = "none";
+	  
 	 var selectImage = document.querySelector("[data-role=listview]"); 
 	 var mc = new Hammer.Manager(selectImage);
 	 mc.add( new Hammer.Tap({ event: 'singletap' }) );
@@ -135,7 +146,7 @@ init: function(){
   // adds the "delete content" button to the modal 
   modaldel: function(ev){
 	  var overlay = document.querySelector("[data-role=overlay]"); 
-	overlay.style.display = "block";
+	  overlay.style.display = "block";
 	
 	  var modal =  document.querySelector("[data-role=modal]");
 	  modal.innerHTML = ""; 
@@ -152,7 +163,7 @@ init: function(){
 	  btnCancel.value = "Cancel";
 	  
 	  btnDelete.value = "Confirm Delete"; 
-	btnDelete.id="delete"; 
+	  btnDelete.id="delete"; 
 		modal.appendChild(h3);
 		modal.appendChild(btnCancel);
 		modal.appendChild(btnDelete); 
@@ -160,6 +171,7 @@ init: function(){
 	grid.listenBtns(image_id); 
   }, // listens for the delete or cancel buttons to be clicked (in the delete modal) 
   listenBtns: function(id){ 
+	
 	var btnCancel = document.querySelector("#cancel"); 
 	var btnDelete = document.querySelector("#delete"); 
 	
@@ -172,36 +184,46 @@ init: function(){
 	 var deleteTap = new Hammer.Manager(btnDelete);
 	 deleteTap.add( new Hammer.Tap({ event: 'singletap' }) );
 	 deleteTap.on("singletap", function(ev){
-		ev.preventDefault(); 
-		grid.deleteImage(ev); 
+		 
+		 ev.preventDefault(); 
+	  	
+		grid.deleteImage(ev);
+		grid.hidemodal(); 
+		
 	 }); 
 	 
   },
   // call this in any button event listeners to hide the modal - this prevents duplication
   hidemodal: function(ev){
-	   var overlay = document.querySelector("[data-role=overlay]"); 
-	overlay.style.display = "none";
-	   var modal = document.querySelector("[data-role=modal]");
-	   modal.style.display = "none";
-	   modal.innerHTML = ""; // clears the modal html - there will be new things appended to the modal each time it is displayed 
+	   document.querySelector("[data-role=overlay]").style.display = "none";
+	   document.querySelector("[data-role=modal]").style.display = "none";;
+	   document.querySelector("[data-role=modal]").innerHTML = ""; // clears the modal html - there will be new things appended to the modal each time it is displayed 
 	   
   },
   deleteImage: function(ev){
-	  document.querySelector("[data-ref='" + image_id + "']").remove(image_id);
-	  document.querySelector("[data-role=overlay]").style.display="none"; 
-	  document.querySelector("[data-role=modal]").style.display = "none";
+ 
 	  // call the delete.php files with the appropriate parameters 
+	  
 	  var path = url + "delete.php";
 
 	  var postData = path + "?dev=" + app.deviceID + "&img_id=" + image_id;
 	  console.log("Deleting image " + path + "?" + postData); 
+	  
+	  
+	  document.querySelector("[data-role=modal]").innerHTML = ""; 
 	  sendRequest(postData, imgDelete, "GET");
   }
 }
 
 // this function will clear the "deleted message" status after 10 seconds 
 function imgDelete(xhr){
-	timeout = setTimeout('status_clear()', 10000); // clears the status after 10 seconds; 
+	document.querySelector("[data-role=overlay]").style.display="none"; 
+	  document.querySelector("[data-role=modal]").style.display = "none";
+	  var li = document.querySelector('[data-ref="' + image_id + '"]');
+	  li.parentNode.removeChild(li);
+	  
+	   
+	timeout = setTimeout('status_clear()', 5000); // clears the status after 5 seconds; 
     message = JSON.parse(xhr.responseText);
 	document.querySelector(".status").innerHTML = message.message; // displays a message to the user if image was deleted successfully or not
 }

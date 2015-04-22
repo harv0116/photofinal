@@ -17,6 +17,8 @@ var take = {
 		  take.full.width = 600;
 		  take.thumb.height = 100;
 		  take.thumb.width = 180;
+		  
+		  take.defaultcanvas();
 		  		  
 		  changeText = document.getElementById("b");
 		  // replace with hammer
@@ -44,7 +46,19 @@ var take = {
 		  
 		  
 		},
-		
+		defaultcanvas: function(){
+					var txt = "Take or see photos by clicking the menu items";
+					var middle = take.full.width / 2;
+					var top = take.full.height - take.full.height + 50;
+					var bottom = take.full.height - 50;
+					take.context.font = "25px sans-serif";
+					take.context.fillStyle = "#6998FF";
+					take.context.strokeStyle = "#6998FF";
+					take.context.textAlign = "center";
+					take.context.fillText(txt, middle, top);
+					take.context.strokeText(txt, middle, top);	
+			
+		},
 		addText: function(ev){
 			var txt = document.getElementById("t").value;
 			  //https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Drawing_text
@@ -122,20 +136,16 @@ var take = {
 			thumbpng = encodeURIComponent( thumbpng );
 			
 			var url = "http://m.edumedia.ca/ioud0001/mad9022/final/save.php";
-			//alert("app.deviceID=" + app.deviceID)
 			var postData = "dev=" + device.uuid + "&thumb=" + thumbpng + "&img=" + fullpng;
-			//var postData = "dev=" + "abbbbbb" + "&thumb=" + thumbpng + "&img=" + fullpng;
-			alert(postData);
+
 			sendRequest(url, take.imgSaved, postData);
 		
 		},
 		imgSaved: function(xhr)
 		{
-			alert(xhr.responseText);
-			//var msg = JSON.parse(xhr.responseText); 
+			var msg = JSON.parse(xhr.responseText); 
 			
-			//alert(msg.message);
-			//alert("Image Saved");
+			alert(msg.message);
 		},
 		useCamera: function()
 		{
